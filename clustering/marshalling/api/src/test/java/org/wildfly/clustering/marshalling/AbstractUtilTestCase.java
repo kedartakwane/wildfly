@@ -71,7 +71,7 @@ import org.junit.Test;
  * @author Paul Ferraro
  */
 public abstract class AbstractUtilTestCase {
-    private static final Map<Object, Object> BASIS = Stream.of(1, 2, 3, 4, 5).collect(Collectors.toMap(i -> i, i -> Integer.toString(-i)));
+    private static final Map<Object, Object> BASIS = Stream.of(1, 2, 3, 4, 5).collect(Collectors.toMap(i -> i, i -> Integer.toString(-i), (u, v) -> {throw new IllegalStateException(String.format("Duplicate key %s", u));}, LinkedHashMap::new));
 
     private final MarshallingTesterFactory factory;
 
